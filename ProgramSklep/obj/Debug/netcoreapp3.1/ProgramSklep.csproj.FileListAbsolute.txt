@@ -1,0 +1,11 @@
+C:\Users\Kamil\Desktop\Code\Git\ProgramSklep\ProgramSklep\bin\Debug\netcoreapp3.1\ProgramSklep.exe
+C:\Users\Kamil\Desktop\Code\Git\ProgramSklep\ProgramSklep\bin\Debug\netcoreapp3.1\ProgramSklep.deps.json
+C:\Users\Kamil\Desktop\Code\Git\ProgramSklep\ProgramSklep\bin\Debug\netcoreapp3.1\ProgramSklep.runtimeconfig.json
+C:\Users\Kamil\Desktop\Code\Git\ProgramSklep\ProgramSklep\bin\Debug\netcoreapp3.1\ProgramSklep.runtimeconfig.dev.json
+C:\Users\Kamil\Desktop\Code\Git\ProgramSklep\ProgramSklep\bin\Debug\netcoreapp3.1\ProgramSklep.dll
+C:\Users\Kamil\Desktop\Code\Git\ProgramSklep\ProgramSklep\bin\Debug\netcoreapp3.1\ProgramSklep.pdb
+C:\Users\Kamil\Desktop\Code\Git\ProgramSklep\ProgramSklep\obj\Debug\netcoreapp3.1\ProgramSklep.csprojAssemblyReference.cache
+C:\Users\Kamil\Desktop\Code\Git\ProgramSklep\ProgramSklep\obj\Debug\netcoreapp3.1\ProgramSklep.AssemblyInfoInputs.cache
+C:\Users\Kamil\Desktop\Code\Git\ProgramSklep\ProgramSklep\obj\Debug\netcoreapp3.1\ProgramSklep.AssemblyInfo.cs
+C:\Users\Kamil\Desktop\Code\Git\ProgramSklep\ProgramSklep\obj\Debug\netcoreapp3.1\ProgramSklep.dll
+C:\Users\Kamil\Desktop\Code\Git\ProgramSklep\ProgramSklep\obj\Debug\netcoreapp3.1\ProgramSklep.pdb
