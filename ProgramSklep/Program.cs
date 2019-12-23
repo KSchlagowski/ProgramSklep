@@ -10,12 +10,15 @@ namespace ProgramSklep
         {
             //zmienne
             List<int> Cart = new List<int>();
-            int UserInput=0;
-            int LastProduct=4;
+            List<string> Names = new List<string>();
+            List<float> Prices = new List<float>();
 
+            int UserInput=0;
+            int ProductsNumber=HowMany();
+            Names = ProductsList();
+            Prices = PricesList();
 
             //menu
-            
             while (true)
             {
                 System.Console.WriteLine();
@@ -66,6 +69,7 @@ namespace ProgramSklep
                             {
                                 System.Console.WriteLine();
                                 System.Console.WriteLine("---------------");
+                                System.Console.WriteLine("Dostępne produkty:");
                                 PrintCart(Cart);  
                                 System.Console.WriteLine("---------------");
                             }
@@ -87,7 +91,7 @@ namespace ProgramSklep
                                 System.Console.WriteLine("---------------");
                                 System.Console.WriteLine("Wpisując liczbę odpowiadającej danej rzeczy dodajesz ją do koszyka.");
                                 System.Console.WriteLine("Cyfra 0 to powrót do poprzedniego menu.");
-                                PrintList();
+                                ProductsList();
                                 System.Console.WriteLine("---------------");
                                 int UserInput3=0;
                                 UserInput3=Convert.ToInt32(Console.ReadLine());
@@ -96,7 +100,7 @@ namespace ProgramSklep
                                 {
                                     break;
                                 }
-                                else if (UserInput2>LastProduct)
+                                else if (UserInput2>ProductsNumber)
                                 {
                                     System.Console.WriteLine("Wprowadzono złą liczbę!");
                                 }
@@ -198,5 +202,106 @@ namespace ProgramSklep
             }
             System.Console.WriteLine("Łączna wartość koszyka: "+Price+" PLN");
         }
+
+
+        //funkcja zliczajaca ilosc ilosc elementow w dwoch plikach i porownujaca otrzymany wynik
+        static int HowMany()
+        {
+            int numberPro=0;
+            try
+            {
+                using (StreamReader streamR = new StreamReader("Products.txt"))
+                {
+                    string line;
+                    while ((line = streamR.ReadLine()) != null)
+                    {
+                        numberPro++;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                System.Console.WriteLine("Błąd w odczycie pliku Products.txt!");
+                System.Console.WriteLine(e.Message);
+            }
+
+            int numberPri=0;
+            try
+            {
+                using (StreamReader streamR = new StreamReader("Prices.txt"))
+                {
+                    string line;
+                    while ((line = streamR.ReadLine()) != null)
+                    {
+                        numberPri++;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                System.Console.WriteLine("Błąd w odczycie pliku Prices.txt!");
+                System.Console.WriteLine(e.Message);
+            }
+
+            if (numberPro != numberPri)
+            {
+                System.Console.WriteLine("UWAGA! Niezgodna ilość danych w plikach Products.txt oraz Prices.txt!");
+            }
+            return numberPro;
+        }
+
+
+        //funkcja tworzaca liste z nazwami produktow
+        static List<string> ProductsList()
+        {
+            List<string> Products = new List<string>();
+            try
+            {
+                using (StreamReader streamR = new StreamReader("Products.txt")) //true or false w Writerze to nadpisanie zawartosci
+                {
+                    
+                    string line;
+                    while ((line = streamR.ReadLine()) != null)
+                    {
+                        Products.Add(line);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                System.Console.WriteLine("Błąd w odczycie pliku Products.txt!");
+                System.Console.WriteLine(e.Message);
+            }
+
+            return Products;
+        }
+
+        //funkcja tworzaca liste z cenami produktow
+        static List<float> PricesList()
+        {
+            List<float> Prices = new List<float>();
+            try
+            {
+                using (StreamReader streamR = new StreamReader("Prices.txt")) //true or false w Writerze to nadpisanie zawartosci
+                {
+                    
+                    string line;
+                    while ((line = streamR.ReadLine()) != null)
+                    {
+                        Prices.Add(Convert.ToInt32(line));
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                System.Console.WriteLine("Błąd w odczycie pliku Prices.txt!");
+                System.Console.WriteLine(e.Message);
+            }
+
+            return Prices;
+        }
+
+        //static PricesList() {}
+        
     }
 }
