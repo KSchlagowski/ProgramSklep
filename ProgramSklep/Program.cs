@@ -70,7 +70,7 @@ namespace ProgramSklep
                                 System.Console.WriteLine();
                                 System.Console.WriteLine("---------------");
                                 System.Console.WriteLine("Dostępne produkty:");
-                                PrintCart(Cart);  
+                                PrintCart(Names, Prices, Cart);  
                                 System.Console.WriteLine("---------------");
                             }
                         }
@@ -91,7 +91,7 @@ namespace ProgramSklep
                                 System.Console.WriteLine("---------------");
                                 System.Console.WriteLine("Wpisując liczbę odpowiadającej danej rzeczy dodajesz ją do koszyka.");
                                 System.Console.WriteLine("Cyfra 0 to powrót do poprzedniego menu.");
-                                ProductsList();
+                                PrintList(Names,Prices,ProductsNumber);
                                 System.Console.WriteLine("---------------");
                                 int UserInput3=0;
                                 UserInput3=Convert.ToInt32(Console.ReadLine());
@@ -106,7 +106,7 @@ namespace ProgramSklep
                                 }
                                 else
                                 {
-                                    Cart.Add(UserInput3);
+                                    Cart.Add(UserInput3-1);
                                 }
 
 
@@ -138,68 +138,26 @@ namespace ProgramSklep
         
 
         //funkcja wyswietlajaca plik z lista dostepnych produktow w sklepie
-        static void PrintList()
+        static void PrintList(List<string> Names, List<float> Prices, int Count) //Pobierana jest dlugosc listy, aby program sie nie wysypal przy roznych wielkosciach plikow
         {
-            try
-        {   // Open the text file using a stream reader.
-            using (StreamReader sr = new StreamReader("ListaProduktow.txt"))
+            for (int i=0; i<Count ;i++)
             {
-            // Read the stream to a string, and write the string to the console.
-                String line = sr.ReadToEnd();
-                Console.WriteLine(line);
+                System.Console.WriteLine(Names[i]+" "+Prices[i]);
             }
-        }
-        catch (IOException e)
-        {
-            Console.WriteLine("The file could not be read:");
-            Console.WriteLine(e.Message);
-        }
         }
 
         //funkcja wyswietlajaca koszyk i jego wartosc
-        static void PrintCart(List<int> Cart)
+        static void PrintCart(List<string> Names, List<float> Prices, List<int> Cart)
         {
+            float Price=0;
             System.Console.WriteLine("W twoim koszyku znajdują się: ");
-            foreach (int i in Cart)
+            
+            for (int i=0; i<Cart.Count ; i++)
             {
-                if (i==1)
-                {
-                    System.Console.WriteLine("Stroik do saksofonu");
-                }
-                if (i==2)
-                {
-                    System.Console.WriteLine("Struny do gitary");
-                }
-                if (i==3)
-                {
-                    System.Console.WriteLine("Oliwka do tlokow");
-                }
-                if (i==4)
-                {
-                    System.Console.WriteLine("Kalafonia");
-                }
+                System.Console.WriteLine(Names[Cart[i]]);
+                Price += Prices[Cart[i]];
             }
 
-            float Price=0;
-            foreach (int i in Cart)
-            {
-                if (i==1)
-                {
-                    Price+=15;
-                }
-                if (i==2)
-                {
-                    Price+=20;
-                }
-                if (i==3)
-                {
-                    Price+=26;
-                }
-                if (i==4)
-                {
-                    Price+=16;
-                }
-            }
             System.Console.WriteLine("Łączna wartość koszyka: "+Price+" PLN");
         }
 
@@ -246,6 +204,7 @@ namespace ProgramSklep
             if (numberPro != numberPri)
             {
                 System.Console.WriteLine("UWAGA! Niezgodna ilość danych w plikach Products.txt oraz Prices.txt!");
+                numberPro=0;
             }
             return numberPro;
         }
