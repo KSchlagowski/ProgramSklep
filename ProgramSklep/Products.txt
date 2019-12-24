@@ -1,5 +1,4 @@
-raz
-dwa
-trzy
-Gitara
-Trabka
+Stroik do saksofonu
+Struny do gitary
+Kalafonia
+Tuner

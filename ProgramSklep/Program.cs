@@ -13,10 +13,9 @@ namespace ProgramSklep
             List<string> Names = new List<string>();
             List<float> Prices = new List<float>();
 
-            int UserInput=0;
             int ProductsNumber=HowMany();
            
-
+           
             //menu
             while (true)
             {
@@ -27,6 +26,7 @@ namespace ProgramSklep
                 System.Console.WriteLine("2. Sprzedaż");
                 System.Console.WriteLine("---------------");
 
+                int UserInput=0;
                 UserInput = Convert.ToInt32(Console.ReadLine());
                 
                 if (UserInput==0)
@@ -44,6 +44,7 @@ namespace ProgramSklep
                         System.Console.WriteLine("1. Wyświetlenie zawartości koszyka.");
                         System.Console.WriteLine("2. Przejście do płatności.");
                         System.Console.WriteLine("3. Sklep.");
+                        System.Console.WriteLine("4. Czyszczenie koszyka.");
                         System.Console.WriteLine("---------------");
 
                         int UserInput2=0;
@@ -69,7 +70,7 @@ namespace ProgramSklep
                                 System.Console.WriteLine();
                                 System.Console.WriteLine("---------------");
                                 System.Console.WriteLine("Dostępne produkty:");
-                                PrintCart(Names, Prices, Cart);  
+                                PrintCart(Names, Prices, Cart, ProductsNumber);  
                                 System.Console.WriteLine("---------------");
                             }
                         }
@@ -88,8 +89,9 @@ namespace ProgramSklep
                             {
                                 System.Console.WriteLine();
                                 System.Console.WriteLine("---------------");
-                                System.Console.WriteLine("Wpisując liczbę odpowiadającej danej rzeczy dodajesz ją do koszyka.");
+                                System.Console.WriteLine("Aby dodać produkt do koszyka wpisz na jakiej jest pozycji licząc od góry.");
                                 System.Console.WriteLine("Cyfra 0 to powrót do poprzedniego menu.");
+                                System.Console.WriteLine();
 
                                 Names = ProductsList();
                                 Prices = PricesList();
@@ -109,13 +111,26 @@ namespace ProgramSklep
                                 }
                                 else
                                 {
-                                    Cart.Add(UserInput3-1);
+                                    System.Console.WriteLine();
+                                    System.Console.WriteLine("Ile sztuk chcesz kupić?: ");
+                                    int pieces=0;
+                                    pieces = int.Parse(Console.ReadLine());
+
+                                    for (int i=1; i<=pieces ; i++)
+                                    {
+                                        Cart.Add(UserInput3-1);
+                                    }
                                 }
 
 
 
 
                             }
+                        }
+                        //reset koszyka
+                        else if (UserInput2==4)
+                        {
+                            Cart = new List<int>();
                         }  
                     }
                 }
@@ -153,9 +168,6 @@ namespace ProgramSklep
                         }
                     }
                 }
-                
-
-
 
                 //inna liczba
                 else
@@ -178,14 +190,44 @@ namespace ProgramSklep
         }
 
         //funkcja wyswietlajaca koszyk i jego wartosc
-        static void PrintCart(List<string> Names, List<float> Prices, List<int> Cart)
+        static void PrintCart(List<string> Names, List<float> Prices, List<int> Cart, int count)
         {
+            List<int> newCart = new List<int>();
+            List<int> repeats = new List<int>();
             float Price=0;
             System.Console.WriteLine("W twoim koszyku znajdują się: ");
             
+            
             for (int i=0; i<Cart.Count ; i++)
             {
-                System.Console.WriteLine(Names[Cart[i]]);
+                if (newCart.Contains(Cart[i])==false)
+                {
+                    newCart.Add(Cart[i]);
+                }
+               
+            }
+            int repeater=0;
+
+            for (int i=0; i<newCart.Count ; i++)
+            {
+                for (int j=0; j<Cart.Count ; j++)
+                {
+                    if (newCart[i]==Cart[j])
+                    {
+                        repeater++;
+                    }
+                }
+                repeats.Add(repeater);
+                repeater=0;
+            }
+
+            for (int i=0; i<newCart.Count; i++)
+            {
+                System.Console.WriteLine(Names[newCart[i]] + " x" + repeats[i]);
+            }
+
+            for (int i=0; i<Cart.Count ; i++)
+            {
                 Price += Prices[Cart[i]];
             }
 
