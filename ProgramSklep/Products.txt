@@ -1,3 +1,5 @@
 raz
 dwa
 trzy
+Gitara
+Trabka

@@ -15,8 +15,7 @@ namespace ProgramSklep
 
             int UserInput=0;
             int ProductsNumber=HowMany();
-            Names = ProductsList();
-            Prices = PricesList();
+           
 
             //menu
             while (true)
@@ -91,7 +90,11 @@ namespace ProgramSklep
                                 System.Console.WriteLine("---------------");
                                 System.Console.WriteLine("Wpisując liczbę odpowiadającej danej rzeczy dodajesz ją do koszyka.");
                                 System.Console.WriteLine("Cyfra 0 to powrót do poprzedniego menu.");
+
+                                Names = ProductsList();
+                                Prices = PricesList();
                                 PrintList(Names,Prices,ProductsNumber);
+
                                 System.Console.WriteLine("---------------");
                                 int UserInput3=0;
                                 UserInput3=Convert.ToInt32(Console.ReadLine());
@@ -111,20 +114,48 @@ namespace ProgramSklep
 
 
 
+
                             }
                         }  
                     }
                 }
 
 
-
-
-
                 //sprzedaż
                 else if (UserInput==2)
                 {
+                    string UserInput2 = "";
+                    string Name = "";
+                    float Price = 0;
 
+                    while (true)
+                    {
+                        System.Console.WriteLine();
+                        System.Console.WriteLine("---------------");
+                        System.Console.WriteLine("Jesteś w trybie przyjmowania nowego towaru. Aby z niego wyjść wprowadź 0.");
+                        System.Console.WriteLine();
+                        System.Console.WriteLine("Wpisz nazwę produktu: ");
+                        UserInput2 = Console.ReadLine();
+
+                        if (UserInput2=="0")
+                        {
+                            break;
+                        }
+
+                        else 
+                        {
+                            Name = UserInput2;
+                            System.Console.WriteLine();
+                            System.Console.WriteLine("Wpisz cenę produktu: ");
+                            Price = float.Parse(Console.ReadLine());
+                            
+                            NewProduct(Name, Price);
+                        }
+                    }
                 }
+                
+
+
 
                 //inna liczba
                 else
@@ -260,7 +291,37 @@ namespace ProgramSklep
             return Prices;
         }
 
-        //static PricesList() {}
+        //funkcja dodajaca nowe produkty
+        static void NewProduct(string name, float price)
+        {
+            try
+            {
+                using (StreamWriter streamW1 = new StreamWriter(("Products.txt"), true))
+                {
+                    streamW1.WriteLine("");
+                    streamW1.Write(name);
+                }
+            }
+            catch (Exception e)
+            {
+                System.Console.WriteLine("Błąd w odczycie pliku Products.txt!");
+                System.Console.WriteLine(e.Message);
+            }
+
+            try
+            {
+                using (StreamWriter streamW2 = new StreamWriter(("Prices.txt"), true))
+                {
+                    streamW2.WriteLine("");
+                    streamW2.Write(price);
+                }
+            }
+            catch (Exception e)
+            {
+                System.Console.WriteLine("Błąd w odczycie pliku Prices.txt!");
+                System.Console.WriteLine(e.Message);
+            }
+        }
         
     }
 }
